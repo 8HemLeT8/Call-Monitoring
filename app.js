@@ -10,25 +10,25 @@ const PORT = 3000;
 
 // GLOBAL
 
-
-
-
 // set rendering to be with ejs
 app.set("view engine", "ejs");
 
 // to enablue use of static files like css files
 app.use(express.static("public"));
 
-
-
-
 // ROUTING
+
 app.get("/", function (req, res) {
-  res.send("Hello World");
+  res.render("home");
 });
 
+app.get("/send", function (req, res) {
+    res.render("sender");
+});
 
-
+app.get("/view", function (req, res) {
+    res.render("viewer");
+});
 
 // server is listening on port 3000
 app.listen(PORT, function () {

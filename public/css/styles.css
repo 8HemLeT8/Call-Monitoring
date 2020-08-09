@@ -1,0 +1,75 @@
+
+
+body{
+    font-family: "Montserrat";
+}
+
+
+h1{
+    font-family: "Montserrat-Bold";
+}
+
+
+
+#title{
+    background-image: linear-gradient(-90deg,#4286f4,#373B44);
+    color: white;
+}
+
+.title-heading{
+    font-family: 'Montserrat-black', sans-serif;
+    line-height: 1.5;
+    font-size: 4.5rem;
+}
+
+.row{
+    padding-bottom: 12%;
+    padding-left: 5%;
+}
+
+/* navigation bar */
+.navbar{
+    background-image: linear-gradient(-90deg,#4286f4,#373B44);
+}
+
+.navbar-brand{
+    font-family: "Ubunto";
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+
+
+/* Downloads Buttons */
+
+.download-button{
+    width: 110%;
+}
+
+
+/* title image */
+
+.title-image{
+    transform: rotate(25deg);
+    position: absolute;
+    right: 20%;
+    bottom: 0;
+}
+
+.footer{
+    background-color: white;
+    text-align: center;
+    padding-bottom: 3%;
+
+}
+
+
+/* form */
+form{
+    display: inline-block;
+    margin: 5% 3% 5% 0%;
+}
+
+
+
+
