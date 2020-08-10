@@ -1,7 +1,10 @@
+// INCLUDE
 const express = require("express");
 const app = express();
-const https = require("https");
+const server = require("http").createServer(app);
+const io = require("socket.io")(server);
 const bodyParser = require("body-parser");
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -23,14 +26,37 @@ app.get("/", function (req, res) {
 });
 
 app.get("/send", function (req, res) {
-    res.render("sender");
+  res.render("sender");
 });
 
 app.get("/view", function (req, res) {
-    res.render("viewer");
+  res.render("viewer");
 });
 
+//------------ Socket.io ----------------
+io.on("connection", (socket) => {
+  console.log("new user connected");
+
+  // socket.on("totalWaitingCalls", (msg) => {
+  //   console.log(msg.totalWaiting);
+  // });
+
+  // socket.on("callDetails", (msg) => {
+  //   console.log(msg);
+  //   kafka.publish(msg);
+  // });
+  
+
+  //end on
+});
+
+//------------------- kafka -----------
+/* Kafka Producer Configuration */
+
+//
+//const client1 = new kafka.KafkaClient({kafkaHost: "localhost:9092"});
+
 // server is listening on port 3000
-app.listen(PORT, function () {
+server.listen(PORT, function () {
   console.log("Server is running on port: " + PORT);
 });

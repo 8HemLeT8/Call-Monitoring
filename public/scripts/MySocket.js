@@ -1,5 +1,5 @@
 
-alert("MySocket.js is linked");
+// alert("MySocket.js is linked");
 
 function initSocket() {
     //socket is global

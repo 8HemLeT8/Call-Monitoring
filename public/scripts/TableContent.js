@@ -1,4 +1,4 @@
-alert("TableContent.js is linked");
+// alert("TableContent.js is linked");
 
 
 
