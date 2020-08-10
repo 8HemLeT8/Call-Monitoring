@@ -1,7 +1,5 @@
 // alert("TableContent.js is linked");
 
-
-
 function startConv() {
     var tr = document.getElementById('openConversations').insertRow();
     var cStart = tr.insertCell(0);
@@ -23,6 +21,10 @@ function startConv() {
     cAge.innerHTML = "<input type='number' min='0' max='120'/>";
     cGender.innerHTML = "<select><option value='male'>גבר</option><option value='female'>אישה</option></select>";
     cEnd.innerHTML = "<button onclick='reportEndCall(this.parentNode.parentNode)'>סיום</button>";
+
+    var totalCalls = parseInt(document.getElementById("total").value) || 0;
+    document.getElementById("total").value = (++totalCalls) + "";
+    
     
 
 }
@@ -41,8 +43,7 @@ function reportEndCall(row) {
     message.gender = row.cells[4].getElementsByTagName('select')[0].value;
     message.age = (row.cells[5].getElementsByTagName('input')[0].value || 18);
     message.totalTime = (parseInt(Date.now()) - parseInt(message.id)) / 1000; // seconds
-
-    // socket.emit("callDetails", message);
+    socket.emit("callDetails", message);
     deleteRow(row);
 }
 

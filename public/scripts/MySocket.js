@@ -9,7 +9,5 @@ function initSocket() {
 
 function sendMessage(total) {
     
-    console.log(total);
-
     socket.emit("totalWaitingCalls", { totalWaiting: total });
 }

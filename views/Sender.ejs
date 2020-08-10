@@ -19,7 +19,7 @@
     <script src="scripts/TableContent.js"></script>
 </head>
 
-<body>
+<body onload="initSocket()" >
     <h1> Sender Page</h1>
     
     <hr>
@@ -27,7 +27,7 @@
     <label for="">Total waiting calls: </label>
     <input type="number" id="total" onkeydown="return false;" min="0" max="200" value="0">
     <!--TODO : add this attribute the input below - onclick="sendMessage(total.value)" -->
-    <input type="button" value="Set"  />
+    <input type="button" onclick="sendMessage(total.value)" value="Set"  />
     &nbsp;
     <select><option value='Emergency'>חירום</option><option>שגרת חירום</option><option>רגיעה</option></select>
 

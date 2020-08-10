@@ -37,14 +37,14 @@ app.get("/view", function (req, res) {
 io.on("connection", (socket) => {
   console.log("new user connected");
 
-  // socket.on("totalWaitingCalls", (msg) => {
-  //   console.log(msg.totalWaiting);
-  // });
+  socket.on("totalWaitingCalls", (msg) => {
+    console.log(msg.totalWaiting);
+  });
 
-  // socket.on("callDetails", (msg) => {
-  //   console.log(msg);
-  //   kafka.publish(msg);
-  // });
+  socket.on("callDetails", (msg) => {
+    console.log(msg);
+    // kafka.publish(msg);
+  });
   
 
   //end on
