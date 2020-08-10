@@ -56,6 +56,23 @@ h1{
     bottom: 0;
 }
 
+@media (max-width: 995px){
+
+    .title-image{
+        position: static;
+        transform: rotate(0);
+    }
+
+    #title{
+        text-align: center;
+    }
+
+}
+
+
+
+/* Footer Section */
+
 .footer{
     background-color: white;
     text-align: center;
