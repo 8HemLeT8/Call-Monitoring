@@ -5,7 +5,7 @@ const Kafka = require("node-rdkafka");
 
 const kafkaConf = {
   "group.id": "cloudkarafka-example",
-  "metadata.broker.list": "moped-01.srvs.cloudkafka.com:9094,moped-02.srvs.cloudkafka.com:9094,moped-03.srvs.cloudkafka.com:9094".split(","),
+  "metadata.broker.list": "rocket-01.srvs.cloudkafka.com:9094,rocket-02.srvs.cloudkafka.com:9094,rocket-03.srvs.cloudkafka.com:9094".split(","),
   "socket.keepalive.enable": true,
   "security.protocol": "SASL_SSL",
   "sasl.mechanisms": "SCRAM-SHA-256",
@@ -15,7 +15,9 @@ const kafkaConf = {
 };
 
 const prefix = "gh38yfvy-";
-const topic = `${prefix}test`;
+const fastTopic = `${prefix}fast`;
+const slowTopic = `${prefix}slow`;
+
 const producer = new Kafka.Producer(kafkaConf);
 
 const genMessage = m => new Buffer.alloc(m.length,m);
@@ -28,6 +30,6 @@ producer.connect();
 module.exports.publish= function(msg)
 {   
   m=JSON.stringify(msg);
-  producer.produce(topic, -1, genMessage(m), uuid.v4());  
+  producer.produce(fastTopic, -1, genMessage(m), uuid.v4());  
   //producer.disconnect();   
 }

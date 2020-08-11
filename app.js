@@ -45,7 +45,7 @@ io.on("connection", (socket) => {
 
   socket.on("callDetails", (msg) => {
     console.log(msg);
-    // kafka.publish(msg);
+    kafka.publish(msg);
   });
   
 
@@ -54,6 +54,9 @@ io.on("connection", (socket) => {
 
 //------------------- kafka -----------
 /* Kafka Producer Configuration */
+
+
+// WHEN THE SERVER GET THE INFO ???
 
 //
 //const client1 = new kafka.KafkaClient({kafkaHost: "localhost:9092"});
