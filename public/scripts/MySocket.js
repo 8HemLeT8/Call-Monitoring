@@ -4,7 +4,7 @@
 function initSocket() {
     //socket is global
     socket = io.connect();
-    alert("connected to the socket");
+    //alert("connected to the socket");
 }
 
 function sendMessage(total) {

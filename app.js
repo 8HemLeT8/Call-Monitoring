@@ -3,7 +3,9 @@ const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
+const kafka = require('./kafkaProduce');
 const bodyParser = require("body-parser");
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -57,6 +59,6 @@ io.on("connection", (socket) => {
 //const client1 = new kafka.KafkaClient({kafkaHost: "localhost:9092"});
 
 // server is listening on port 3000
-server.listen(PORT, function () {
+server.listen(PORT || process.env.PORT, function () {
   console.log("Server is running on port: " + PORT);
 });
