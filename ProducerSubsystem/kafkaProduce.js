@@ -27,9 +27,16 @@ producer.on("ready", function(arg) {
 });
 producer.connect();
 
-module.exports.publish= function(msg)
+module.exports.publishToFastRoute= function(msg)
 {   
   m=JSON.stringify(msg);
   producer.produce(fastTopic, -1, genMessage(m), uuid.v4());  
+  //producer.disconnect();   
+}
+
+module.exports.publishToSlowRoute= function(msg)
+{   
+  m=JSON.stringify(msg);
+  producer.produce(slowTopic, -1, genMessage(m), uuid.v4());  
   //producer.disconnect();   
 }

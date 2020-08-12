@@ -45,7 +45,8 @@ io.on("connection", (socket) => {
 
   socket.on("callDetails", (msg) => {
     console.log(msg);
-    kafka.publish(msg);
+    kafka.publishToFastRoute(msg);
+    kafka.publishToSlowRoute(msg);
   });
   
 
