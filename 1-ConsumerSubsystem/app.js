@@ -4,10 +4,25 @@ const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 const bodyParser = require("body-parser");
+const redis = require("redis");
 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// Create redis Client
+let client = redis.createClient();
+
+client.on("error", function(error) {
+  console.error(error);
+});
+
+client.on("connect", function(error) {
+  console.error("Connected to Redis");
+});
+ 
+client.set("key", "value", redis.print);
+client.get("key", redis.print);
 
 // MACRO
 const PORT = 4000;
@@ -25,6 +40,7 @@ app.use(express.static("public"));
 app.get("/",function (req,res) {
     res.send("Consumer 1 Home Page");
   });
+
 
 
 // server is listening on port 3000
