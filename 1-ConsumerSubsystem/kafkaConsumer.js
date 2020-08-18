@@ -1,6 +1,6 @@
 // https://www.cloudkarafka.com/ הפעלת קפקא במסגרת ספק זה
 
-const uuid = require("uuid");
+//const uuid = require("uuid");
 const Kafka = require("node-rdkafka");
 
 const kafkaConf = {
@@ -29,13 +29,13 @@ consumer.on("error", function (err) {
 });
 consumer.on("ready", function (arg) {
   console.log(`Consumer is ready`);
-  consumer.subscribe(fastTopic);
+  consumer.subscribe([fastTopic]);
   consumer.consume();
 });
 consumer.on("data", function (m) {
   console.log("calling commit");
   consumer.commit(m);
-  console.log(m.value.toString());
+  console.log("The value is : "+m.value.toString());
 });
 consumer.on("disconnected", function (arg) {
   process.exit();

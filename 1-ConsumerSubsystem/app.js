@@ -5,6 +5,7 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 const bodyParser = require("body-parser");
 const redis = require("redis");
+const kafka = require('./kafkaConsumer');
 
 
 app.use(bodyParser.json());
