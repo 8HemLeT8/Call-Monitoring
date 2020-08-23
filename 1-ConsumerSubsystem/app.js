@@ -22,8 +22,6 @@ client.on("connect", function(error) {
   console.error("Connected to Redis");
 });
  
-client.set("key", "value", redis.print);
-client.get("key", redis.print);
 
 // MACRO
 const PORT = 4000;
