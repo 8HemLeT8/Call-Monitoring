@@ -7,20 +7,24 @@ function avgWaitTime() {
     client.keys("*", (err, keys) => {
 
         let times = [];
-        let count = keys.length;
+        let count = 0;
         let sum = 0;
 
         keys.forEach((key) => {
-            client.get(key, function (err, obj) {
+            client.get(key, function (err, val) {
 
-                const json = JSON.parse(obj);
+                const json = JSON.parse(val);
+              //  console.log("time difference in seconds: " + Math.floor((parseInt(Date.now()) - parseInt(json.id)) / 1000));
 
-                //  console.log(json);
-                times.push(json.totalTime);
+                if (Math.floor((parseInt(Date.now()) - parseInt(json.id)) / 1000) < 600) { // add only calls from the last 10 minutes
+                    times.push(json.totalTime);
+                    ++count;
+                }else{
+                  //  --count;
+                }
 
-                --count;
-                if (count <= 0) {
-                    //console.log(times);
+                if (count > 0) {
+                    console.log(times);
 
                     for (let i = 0; i < times.length; i++) {
                         sum += times[i];
@@ -35,7 +39,7 @@ function avgWaitTime() {
     });
 }
 
-function countByCity(){
+function countByCity() {
     client.keys("*", (err, keys) => {
 
         let cities = [];
@@ -53,13 +57,13 @@ function countByCity(){
                 if (count <= 0) {
                     //console.log(cities);
 
-                    let wordcnt = cities.reduce(function(map, word){ //map reduce to count each city
-                        map[word] = (map[word]||0)+1;
+                    let wordcnt = cities.reduce(function (map, word) { //map reduce to count each city
+                        map[word] = (map[word] || 0) + 1;
                         return map;
 
                     }, Object.create(null));
 
-                    console.log("amount of calls by city: "+JSON.stringify(wordcnt, null, 2));
+                    console.log("amount of calls by city: " + JSON.stringify(wordcnt, null, 2));
 
                 }
 
@@ -70,7 +74,7 @@ function countByCity(){
 }
 
 
-function countBySubject(){
+function countBySubject() {
     client.keys("*", (err, keys) => {
 
         let topics = [];
@@ -86,15 +90,15 @@ function countBySubject(){
 
                 --count;
                 if (count <= 0) {
-                  //  console.log(cities);
+                    //  console.log(cities);
 
-                    let wordcnt = topics.reduce(function(map, word){ //map reduce to count each topic
-                        map[word] = (map[word]||0)+1;
+                    let wordcnt = topics.reduce(function (map, word) { //map reduce to count each topic
+                        map[word] = (map[word] || 0) + 1;
                         return map;
 
                     }, Object.create(null));
 
-                    console.log("amount of calls by cause: "+JSON.stringify(wordcnt, null, 2));
+                    console.log("amount of calls by cause: " + JSON.stringify(wordcnt, null, 2));
 
                 }
 
@@ -105,6 +109,6 @@ function countBySubject(){
 }
 
 
-countByCity();
-countBySubject();
+//countByCity();
+//countBySubject();
 avgWaitTime();
