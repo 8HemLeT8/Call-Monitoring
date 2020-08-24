@@ -24,7 +24,7 @@ client.on("connect", function(error) {
  
 
 // MACRO
-const PORT = 4000;
+const PORT = 4000 || process.env.PORT;
 
 // GLOBAL
 
@@ -43,6 +43,6 @@ app.get("/",function (req,res) {
 
 
 // server is listening on port 3000
-server.listen(PORT || process.env.PORT, function () {
+server.listen(PORT , function () {
     console.log("Server is running on port: " + PORT);
   });
