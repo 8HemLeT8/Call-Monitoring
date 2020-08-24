@@ -43,6 +43,8 @@ function reportEndCall(row) {
     message.gender = row.cells[4].getElementsByTagName('select')[0].value;
     message.age = (row.cells[5].getElementsByTagName('input')[0].value || 18);
     message.totalTime = (parseInt(Date.now()) - parseInt(message.id)) / 1000; // seconds
+   // message.currTime = Math.floor(ParseInt(Date.now())/1000);//save timestamp by seconds
+    
     socket.emit("callDetails", message);
     deleteRow(row);
 }
