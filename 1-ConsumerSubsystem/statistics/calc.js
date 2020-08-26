@@ -3,6 +3,7 @@ const redis = require("redis");
 let times = [];
 let client = redis.createClient();
 
+let count = 0;
 function getTimesArray() {
     client.keys("*", (err, keys) => {
 
@@ -13,25 +14,28 @@ function getTimesArray() {
                 //  console.log("time difference in seconds: " + Math.floor((parseInt(Date.now()) - parseInt(json.id)) / 1000));
 
                 if (Math.floor((parseInt(Date.now()) - parseInt(json.id)) / 1000) < 600) { // add only calls from the last 10 minutes
-                    console.log(json.totalTime);
+                    // console.log(json.totalTime);
                     times.push(json.totalTime);
+
+                }
+                count++;
+                if (count >= keys.length) {
+                    //  console.log(times);
+                    let sum = 0;
+                    for (let i = 0; i < times.length; i++) {
+                        sum += times[i];
+                    }
+                    sum /= times.length;
+                    console.log("waiting time avg: " + (sum));
+                    return times;
 
                 }
             });
         });
     });
 
-   // return times;
 }
-function avgWaitTime(array) {
-    console.log(times);
-    let sum = 0;
-    for (let i = 0; i < times.length; i++) {
-        sum += times[i];
-    }
-    sum /= times.length;
-    console.log("waiting time avg: " + (sum));
-}
+
 
 
 /*
@@ -107,7 +111,7 @@ function countByCity() {
     });
 }
 
-function countByLenguage(){
+function countByLenguage() {
     client.keys("*", (err, keys) => {
 
         let lengs = [];
@@ -126,12 +130,12 @@ function countByLenguage(){
                     //  console.log(cities);
 
                     let wordcnt = lengs.reduce(function (map, word) { //map reduce to count each topic
-                        map["word : " + word] = (map[word] || 0) + 1;
+                        map[word] = (map[word] || 0) + 1;
                         return map;
 
                     }, Object.create(null));
 
-                    console.log("amount of calls by cause: " + JSON.stringify(wordcnt, null, 2));
+                    console.log("amount of calls by lenguage: " + JSON.stringify(wordcnt, null, 2));
                     return wordcnt;
                 }
 
@@ -160,7 +164,7 @@ function countBySubject() {
                     //  console.log(cities);
 
                     let wordcnt = topics.reduce(function (map, word) { //map reduce to count each topic
-                        map["word : " + word] = (map[word] || 0) + 1;
+                        map[word] = (map[word] || 0) + 1;
                         return map;
 
                     }, Object.create(null));
@@ -176,17 +180,42 @@ function countBySubject() {
 }
 
 
+function countByStatus() {
+    client.keys("*", (err, keys) => {
+
+        let statuses = [];
+        let count = keys.length;
+
+        keys.forEach((key) => {  //for each key obj will be the value
+            client.get(key, function (err, obj) {
+
+                const json = JSON.parse(obj);
+
+                //  console.log(json);
+                statuses.push(json.status);
+
+                --count;
+                if (count <= 0) {
+
+                    let wordcnt = statuses.reduce(function (map, word) { //map reduce to count each topic
+                        map[word] = (map[word] || 0) + 1;
+                        return map;
+
+                    }, Object.create(null));
+
+                    console.log("amount of calls by status: " + JSON.stringify(wordcnt, null, 2));
+                    return wordcnt;
+                }
+
+            });
+        });
+
+    });
+}
+
 countByCity();
 countByLenguage();
 countBySubject();
-/*
-getTimesArray().then(function() {
-    console.log(times);
-    let sum = 0;
-    for (let i = 0; i < times.length; i++) {
-        sum += times[i];
-    }
-    sum /= times.length;
-    console.log("waiting time avg: " + (sum));
-});
-*/
+countByStatus();
+
+getTimesArray();

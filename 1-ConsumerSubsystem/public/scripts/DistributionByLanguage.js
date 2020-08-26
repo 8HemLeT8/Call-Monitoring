@@ -1,7 +1,8 @@
 
-let myChart = document.getElementById("canvas-DistributionByLanguage").getContext("2d");
 
-let massPopChart = new Chart(myChart, {
+let languageChart = document.getElementById("canvas-DistributionByLanguage").getContext("2d");
+
+let PopChart = new Chart(languageChart, {
   type: "doughnut", // bar, horizontalBar, pie, line, doughnut, radar, polarArea
   data: {
     labels: [

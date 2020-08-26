@@ -3,40 +3,114 @@
 
 <head>
     <title>Bar Chart</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <script src="scripts/utils.js"></script>
+    <!-- font awsome -->
+    <script src="https://kit.fontawesome.com/0c77acaf4d.js" crossorigin="anonymous"></script>
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Ubuntu&display=swap"
+        rel="stylesheet">
+
+    <!-- css link -->
     <link rel="stylesheet" href="css/styles.css">
-    
+
+    <!-- Chart.js  -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    <script src="scripts/utils.js"></script>
+
 </head>
 
 <body>
 
-    <h1> Calls Statistics </h1>
+    <nav id="nav" class="navbar navbar-dark bg-primary">
+            <a class="navbar-brand" href="#"><i class="far fa-chart-bar"></i> Call Statistics</a>
+        </nav>
 
-    <div class="container" style="width: 75%;">
-        <canvas id="canvas-WaitingTime"></canvas>
-    </div>
+    <section class="header" >
+        
+
+        <div class="row">
+
+            <div class="col-lg-6">
+
+            </div>
+
+            <div class="col-lg-3">
+
+            </div>
+            <div class="col-lg-3">
+                <h1 class="title-heading"> Now Watch Live Statistics of your Calls .</h1>
+
+            </div>
+
+
+        </div>
+    </section>
+
+
+    <section class="barGraphs">
+
+        <div class="row">
+
+            <div class="col-lg-6">
+                <canvas id="canvas-WaitingTime"></canvas>
+
+            </div>
+
+            <div class="col-lg-6">
+                <canvas id="canvas-NumOfWaitingCalls"></canvas>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="pieGraphs">
+        <div class="row">
+
+            <div class="col-lg-6">
+                <canvas id="canvas-DistributionByRequests"></canvas>
+
+            </div>
+
+            <div class="col-lg-6">
+                <canvas id="canvas-DistributionByLanguage"></canvas>
+
+            </div>
+
+        </div>
+    </section>
+
+   
+
+    <footer class="footer">
+        © Copyright 2020 CallCenter
+    </footer>
+
+
+    <!-- JS, Popper.js, and jQuery -->
+    <!-- Bootstrap Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+    <!-- load charts.js charts -->
     <script src="scripts/WaitingTime.js"></script>
-
-    <!-- <div class="container" style="width: 75%;">
-        <canvas id="canvas-NumOfWaitingCalls"></canvas>
-    </div>
-
-    <script src="scripts/NumOfWaitingCalls.js"></script> -->
-
-    <!-- <div class="container" style="width: 75%;">
-        <canvas id="canvas-DistributionByRequests"></canvas>
-    </div>
-
-    <script src="scripts/DistributionByRequests.js"></script> -->
-
-    <!-- <div class="container" style="width: 75%;">
-        <canvas id="canvas-DistributionByLanguage"></canvas>
-    </div>
-
+    <script src="scripts/NumOfWaitingCalls.js"></script>
+    <script src="scripts/DistributionByRequests.js"></script>
     <script src="scripts/DistributionByLanguage.js"></script>
-     -->
-    
+
+
 </body>
 
 </html>

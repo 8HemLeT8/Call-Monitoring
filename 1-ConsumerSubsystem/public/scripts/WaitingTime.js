@@ -1,5 +1,4 @@
-
-var color = Chart.helpers.color;
+let color = Chart.helpers.color;
 var barChartData = {
   labels: ["January", "February", "March", "April", "May", "June", "July"],
   datasets: [
@@ -9,25 +8,18 @@ var barChartData = {
       borderColor: window.chartColors.blue,
       borderWidth: 1,
       data: [50, 50, 50, 50, 50, 50, 50],
-    }
-  ]
-};
-
-window.onload = function () {
-  var ctx = document.getElementById("canvas-WaitingTime").getContext("2d");
-  window.myBar = new Chart(ctx, {
-    type: "bar",
-    data: barChartData,
-    options: {
-      responsive: true,
-      legend: {
-        position: "top",
-      },
     },
-  });
+  ],
 };
 
-
-
-
-
+var ctx = document.getElementById("canvas-WaitingTime").getContext("2d");
+window.myBar = new Chart(ctx, {
+  type: "bar",
+  data: barChartData,
+  options: {
+    responsive: true,
+    legend: {
+      position: "top",
+    },
+  },
+});

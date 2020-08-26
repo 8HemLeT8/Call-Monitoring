@@ -1,10 +1,42 @@
+body{
+    font-family: "Montserrat";
 
-h1{
-    text-align: center;
+}
+
+h1 {
+  text-align: center;
+  font-family: "Montserrat-bold";
+    padding-top: 10%;
+  color: white;
 }
 
 canvas {
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
+
+.header {
+  background: url(../images/chart.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  padding-bottom: 30%;
+  margin-bottom: 5%;
+}
+
+.pieGraphs{
+    margin-bottom: 7%;
+}
+
+.footer {
+    background-color: white;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 3%;
+    padding-top: 1%;
+  }
