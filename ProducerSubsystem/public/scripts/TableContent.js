@@ -35,6 +35,10 @@ function reportEndCall(row) {
         document.getElementById("total").value = (--totalCalls) + "";
     }
 
+    let status = document.getElementsById("status");
+    let s = status.options[status.selectedIndex].value;
+    console.log(s);
+    
     var message = {};
     message.id = row.cells[0].getElementsByTagName('div')[0].id;
     message.city = row.cells[1].getElementsByTagName('select')[0].value;
@@ -44,6 +48,7 @@ function reportEndCall(row) {
     message.age = (row.cells[5].getElementsByTagName('input')[0].value || 18);
     message.totalTime = (parseInt(Date.now()) - parseInt(message.id)) / 1000; // seconds
    // message.currTime = Math.floor(ParseInt(Date.now())/1000);//save timestamp by seconds
+    message.status = s;
     
     socket.emit("callDetails", message);
     deleteRow(row);

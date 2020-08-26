@@ -8,6 +8,11 @@ const redis = require("redis");
 const kafka = require('./kafkaConsumer');
 const schedule = require('node-schedule');
 
+// set rendering to be with ejs
+app.set("view engine", "ejs");
+
+// to enablue use of static files like css files
+app.use(express.static("public"));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -37,16 +42,11 @@ const PORT = 4000 || process.env.PORT;
 
 // GLOBAL
 
-// set rendering to be with ejs
-app.set("view engine", "ejs");
-
-// to enablue use of static files like css files
-app.use(express.static("public"));
 
 // ROUTING
 
 app.get("/", function (req, res) {
-  res.send("Consumer 1 Home Page");
+  res.render("dashboard");
 });
 
 
