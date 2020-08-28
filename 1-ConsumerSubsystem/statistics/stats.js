@@ -53,9 +53,52 @@ async function last10MinWaitingTimeAvg() {
   return sum;
 }
 
-async function aggNumOfWaitingCalls() {}
+async function aggOf5min(callAttribute) {
+  var d = new Date();
+  d.setHours(0, 0, 0, 0); // midnight
+  let from = Math.floor(d.getTime() / 1000);
+  let to = from + 300;
+  let now = Math.floor(new Date().getTime() / 1000);
+  let avgs = [];
+//   console.log(to);
+//   console.log(now);
+//   console.log(stop);
 
-async function aggWaitingTime() {}
+  let temp = [];
+
+  let data = await collectAllData();
+//   console.log(data);
+
+
+  while (to < now) {
+    
+    for (let i = 0; i < data.length; i++) {
+      let curr = Math.floor(parseInt(data[i][callAttribute]) / 1000);
+      if (to - curr <= 300 && to - curr >= 0) {
+        // add only calls from the last 5 minutes
+        //   console.log(curr);
+
+        temp.push(parseInt(data[i].totalTime));
+        //  console.log(temp);
+      }
+    }
+    
+    let sum = 0;
+    if (temp.length > 0) {
+      for (let i = 0; i < temp.length; i++) {
+        //    console.log(temp[i])
+        sum += temp[i];
+      }
+      sum /= temp.length;
+    }
+    console.log(sum);
+    avgs.push(sum);
+    to += 300;
+    temp = [];
+  }
+//   console.log(avgs);
+  return avgs;
+}
 
 async function getCallsPerAtt(callAttribute) {
   let data = await collectAllData();
@@ -89,8 +132,9 @@ async function getCallsPerAtt(callAttribute) {
 
 function test() {}
 // last10MinWaitingTimeAvg();                        DONE
-
-getCallsPerAtt("language");
-getCallsPerAtt("status");
-getCallsPerAtt("topic");
-getCallsPerAtt("city");
+// getCallsPerAtt("language");
+// getCallsPerAtt("status");
+// getCallsPerAtt("topic");
+// getCallsPerAtt("city");
+//aggOf5min('id');
+//aggOf5min('totalCalls');
