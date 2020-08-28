@@ -11,13 +11,26 @@ h1 {
   color: white;
   font-weight: bold;
 }
-
+table{
+  text-align: center;
+}
 canvas {
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
 }
+/* Title header Section*/
+.header {
+  background: url(../images/chart.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  padding-bottom: 30%;
+  margin-bottom: 5%;
+}
 
+/* Widgets Sections*/
 .round-corner {
   border-radius: 25px;
 }
@@ -31,24 +44,36 @@ canvas {
   float: none; 
   margin-bottom: 10px; 
 }
+
 .second-content{
     padding-right: 3%;
 }
 
-.header {
-  background: url(../images/chart.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  padding-bottom: 30%;
-  margin-bottom: 5%;
-}
 
+/* Bar graph Section */
+
+
+/* Aggregation tables Section */
+.my-custom-scrollbar {
+  position: relative;
+  height: 350px;
+  overflow: auto;
+  }
+
+  .table-wrapper-scroll-y {
+  display: block;
+  }
+
+
+/* Pie graphs Section */
 .pieGraphs {
   margin-bottom: 7%;
 }
 
+
+/* Tables By Area and Topic Section */
+
+/* Footer Section */
 .footer {
   background-color: white;
   position: fixed;

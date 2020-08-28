@@ -284,6 +284,8 @@ function waitTimeAggregation() {
 }
 
 
+
+
 /*
 countByCity();
 countByLenguage();

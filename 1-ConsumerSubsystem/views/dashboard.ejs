@@ -23,8 +23,40 @@
     <!-- mdb -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
 
-
+    <!-- utils file (includes colors etc) -->
     <script src="scripts/utils.js"></script>
+
+    <!-- load Statistics data into global object which will be used later on in the chart.js scripts -->
+    <script>
+        Statistics = {};
+
+        Statistics.waitingCalls = <%=waitingCalls %> ;
+        console.log(Statistics.waitingCalls);
+
+        Statistics.aggWaitingCalls = [<%=aggWaitingCalls %> ];
+        console.log(Statistics.aggWaitingCalls);
+
+        Statistics.waitingTime = <%=waitingTime %>;
+        console.log(Statistics.waitingTime);
+
+        Statistics.aggWaitingTime = [ <%=aggWaitingTime %>];
+        console.log(Statistics.aggWaitingTime);
+
+        Statistics.distByReq = 1;
+        console.log(Statistics.distByReq);
+
+        Statistics.distByLanguage = 2;
+        console.log(Statistics.distByLanguage);
+
+        Statistics.numOfCallsByArea = 3;
+        console.log(Statistics.numOfCallsByArea);
+
+        Statistics.numOfCallsByTopic = 4;
+        console.log(Statistics.numOfCallsByTopic);
+
+
+    </script>
+
 
 
 </head>
@@ -75,7 +107,8 @@
                         <div class="widget-content text-white d-flex h-100 mask blue-gradient-rgba">
                             <div class="first-content align-self-center p-3">
                                 <h3 class="card-title">Waiting Calls</h3>
-                                <p class="lead mb-0">The number of waiting calls in the last 10 minutes : </p>
+                                <p class="lead mb-0">The number of waiting calls in the last 10 minutes :
+                                    <%=waitingCalls%> calls</p>
                             </div>
                             <div class="second-content align-self-center mx-auto text-center">
                                 <i class="fas fa-voicemail fa-3x"></i>
@@ -85,7 +118,7 @@
 
                     </div>
 
-                    
+
 
 
 
@@ -110,7 +143,7 @@
                             <div class="first-content align-self-center p-3">
                                 <h3 class="card-title">Waiting Time</h3>
                                 <p class="lead mb-0">The calls waiting time in the last </p>
-                                <p class="lead mb-0">10 minutes is :</p>
+                                <p class="lead mb-0">10 minutes is : <%= waitingTime %> minutes </p>
                             </div>
                             <div class="second-content align-self-center mx-auto text-center">
                                 <i class="fas fa-stopwatch fa-3x"></i>
@@ -120,7 +153,7 @@
 
                     </div>
 
-                   
+
 
                 </div>
                 <!-- Card -->
@@ -140,17 +173,110 @@
         <div class="row">
 
             <div class="col-lg-6">
-                <canvas id="canvas-WaitingTime"></canvas>
-
+                <canvas id="canvas-NumOfWaitingCalls"></canvas>
             </div>
 
             <div class="col-lg-6">
-                <canvas id="canvas-NumOfWaitingCalls"></canvas>
+                <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Time of the day</th>
+                                <th>Waiting Calls</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <% let myDate = new Date("July 21, 1983 00:00:00") ;%>
+                            <% let minutes = myDate.getMinutes(); %>
+                            <% let hours = myDate.getHours(); %>
+                            
+                            <% for(let i = 0 ; i< 288 ; i++){ %>
+                            <tr>
+
+                                <td><%= hours%>:<%= minutes%> </td>
+
+                                <td> value from the object</td>
+                                <% let myNewDate = new Date(myDate.getTime()+5*60000); %> 
+                                <% minutes= myNewDate.getMinutes()%>
+                                <% hours= myNewDate.getHours()%> 
+                                <% myDate=myNewDate; %> 
+
+                            </tr>
+
+                            <% } %>
+
+
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
+
+
+
+
 
         </div>
 
     </section>
+
+
+
+
+    <section class="aggregations-tables">
+
+        <div class="row">
+
+            <div class="col-lg-6">
+                <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Time of the day</th>
+                                <th>Waiting Calls</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <% myDate = new Date("July 21, 1983 00:00:00") ;%>
+                            <% minutes = myDate.getMinutes(); %>
+                            <% hours = myDate.getHours(); %>
+                            
+                            <% for(let i = 0 ; i< 288 ; i++){ %>
+                            <tr>
+
+                                <td><%= hours%>:<%= minutes%> </td>
+
+                                <td> value from the object</td>
+                                <% myNewDate = new Date(myDate.getTime()+5*60000); %> 
+                                <% minutes= myNewDate.getMinutes()%>
+                                <% hours= myNewDate.getHours()%> 
+                                <% myDate=myNewDate; %> 
+
+                            </tr>
+
+                            <% } %>
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <canvas id="canvas-WaitingTime"></canvas>
+
+            </div>
+
+
+
+        </div>
+    </section>
+
+
+
+    
 
     <section class="pieGraphs">
         <div class="row">
@@ -166,6 +292,60 @@
             </div>
 
         </div>
+    </section>
+
+
+
+    <section class="tablesBy-Area-Topic">
+
+        <div class="row">
+
+            <div class="area-table col-lg-6">
+                <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Time of the day</th>
+                                <th>Waiting Calls</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr>
+                                <td>stam</td>
+                                <td>data</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+
+            <div class="language-table col-lg-6">
+                <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Time of the day</th>
+                                <th>Waiting Calls</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr>
+                                <td>stam</td>
+                                <td>data</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
     </section>
 
 
@@ -192,8 +372,8 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
 
     <!-- load charts.js charts -->
-    <script src="scripts/WaitingTime.js"></script>
-    <script src="scripts/NumOfWaitingCalls.js"></script>
+    <script src="scripts/AggWaitingTime.js"></script>
+    <script src="scripts/AggNumOfWaitingCalls.js"></script>
     <script src="scripts/DistributionByRequests.js"></script>
     <script src="scripts/DistributionByLanguage.js"></script>
 

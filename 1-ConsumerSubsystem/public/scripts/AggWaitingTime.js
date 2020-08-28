@@ -1,13 +1,13 @@
 let color = Chart.helpers.color;
 var barChartData = {
-  labels: ["January", "February", "March", "April", "May", "June", "July"],
+  labels: ["January", "February", "March"],
   datasets: [
     {
       label: "Waiting Time",
       backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
       borderColor: window.chartColors.blue,
       borderWidth: 1,
-      data: [50, 50, 50, 50, 50, 50, 50],
+      data: Statistics.aggWaitingTime,
     },
   ],
 };

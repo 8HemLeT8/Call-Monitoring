@@ -5,8 +5,8 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 const bodyParser = require("body-parser");
 const redis = require("redis");
-const kafka = require('./kafkaConsumer');
-const schedule = require('node-schedule');
+const kafka = require("./kafkaConsumer");
+const schedule = require("node-schedule");
 
 // set rendering to be with ejs
 app.set("view engine", "ejs");
@@ -34,7 +34,7 @@ rule.minute = 0;
 
 schedule.scheduleJob(rule, function () {
   client.flushdb();
-  console.log('Redis DB Flushed!');
+  console.log("Redis DB Flushed!");
 });
 
 // MACRO
@@ -42,14 +42,20 @@ const PORT = 4000 || process.env.PORT;
 
 // GLOBAL
 
-
 // ROUTING
 
 app.get("/", function (req, res) {
-  res.render("dashboard");
+  res.render("dashboard", {
+    waitingCalls: 50,
+    aggWaitingCalls: [10, 20, 30],
+    waitingTime: 30,
+    aggWaitingTime: [40, 50, 60],
+    distByReq: [70,80,90],
+    distByLanguage: [ 90 , 80, 70],
+    numOfCallsByArea: [],
+    numOfallsByTopic: [],
+  });
 });
-
-
 
 // server is listening on port 3000
 server.listen(PORT, function () {
