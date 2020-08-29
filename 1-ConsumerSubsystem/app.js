@@ -40,7 +40,6 @@ schedule.scheduleJob(rule, function () {
 // MACRO
 const PORT = 4000 || process.env.PORT;
 
-// GLOBAL
 
 // ROUTING
 
@@ -48,16 +47,7 @@ app.get("/", function (req, res) {
   statistics.calcStatistics().then((stats)=>{
     console.log(stats);
     res.render("dashboard",stats)
-    // res.render("dashboard", {
-    //   waitingCalls: 50,
-    //   aggWaitingCalls: [10, 20, 30],
-    //   waitingTime: 30,
-    //   aggWaitingTime: [40, 50, 60],
-    //   distByReq: [70, 80, 90],
-    //   distByLanguage: [90, 80, 70],
-    //   numOfCallsByArea: [],
-    //   numOfallsByTopic: [],
-    // });
+    
   });
   
 });

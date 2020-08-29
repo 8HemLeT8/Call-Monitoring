@@ -11,9 +11,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // MACRO
-const PORT = 3000;
+const PORT = 3000 || process.env.PORT;
 
-// GLOBAL
 
 // set rendering to be with ejs
 app.set("view engine", "ejs");
@@ -53,16 +52,8 @@ io.on("connection", (socket) => {
   //end on
 });
 
-//------------------- kafka -----------
-/* Kafka Producer Configuration */
-
-
-// WHEN THE SERVER GET THE INFO ???
-
-//
-//const client1 = new kafka.KafkaClient({kafkaHost: "localhost:9092"});
 
 // server is listening on port 3000
-server.listen(PORT || process.env.PORT, function () {
+server.listen(PORT , function () {
   console.log("Server is running on port: " + PORT);
 });

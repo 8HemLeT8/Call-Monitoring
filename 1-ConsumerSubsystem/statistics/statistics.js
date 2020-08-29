@@ -124,19 +124,4 @@ module.exports.calcStatistics= async function () {
 
 }
 
-// last10MinAvg('totalTime');
-// last10MinAvg('totalCalls') ;
-//  getCallsPerAtt("language");
-// getCallsPerAtt("status");
-// getCallsPerAtt("topic");
-//getCallsPerAtt("city");
-//aggOf5min('totalTime');
-//  aggOf5min('totalCalls');
-// calcStatistics();
-// collectAllData().then((res)=>{
-//   console.log(res);
-// });
-// calcStatistics().then((res)=>{
-//   console.log(res);
-// });
 

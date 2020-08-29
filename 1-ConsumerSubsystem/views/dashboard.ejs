@@ -170,15 +170,22 @@
 
     </section>
 
-    <section class="barGraphs">
+   
+    <!-- add bg color  -->
 
-        <div class="row">
+    <section id="testimonials">
+        
+        <h2> Watch the waiting time of the calls during the day</h1>
+            <h3> In a Graph or a Table Just Swipe</h3>
 
-            <div class="col-lg-6">
+
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
                 <canvas id="canvas-WaitingTime"></canvas>
-            </div>
 
-            <div class="col-lg-6">
+            </div>
+            <div class="carousel-item">
                 <div class="table-wrapper-scroll-y my-custom-scrollbar">
                     <table class="table table-bordered">
                         <thead>
@@ -220,23 +227,50 @@
                     </table>
                 </div>
             </div>
-
-
-
-
-
+    
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
         </div>
+
+    
 
     </section>
 
-
-
-
-    <section class="aggregations-tables">
-
+    <section  class="pieGraphs">
         <div class="row">
 
             <div class="col-lg-6">
+                <canvas id="canvas-DistributionByRequests"></canvas>
+
+            </div>
+
+            <div class="col-lg-6">
+                <canvas id="canvas-DistributionByLanguage"></canvas>
+
+            </div>
+
+        </div>
+    </section>  
+
+    <!-- add bg color  -->
+    <section class="aggregations-tables">
+        <h2> Watch the number of waiting calls during the day</h1>
+            <h3> In a Graph or a Table Just Swipe</h3>
+
+        <div id="secondCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <canvas id="canvas-NumOfWaitingCalls"></canvas>
+
+              </div>
+              <div class="carousel-item">
                 <div class="table-wrapper-scroll-y my-custom-scrollbar">
                     <table class="table table-bordered">
                         <thead>
@@ -278,36 +312,23 @@
                         </tbody>
                     </table>
                 </div>
+              </div>
+              
             </div>
-            <div class="col-lg-6">
-                <canvas id="canvas-NumOfWaitingCalls"></canvas>
-
-            </div>
-
-
-
-        </div>
+            <a class="carousel-control-prev" href="#secondCarousel" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#secondCarousel" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
     </section>
+    
+    
+   
 
-
-
-
-
-    <section class="pieGraphs">
-        <div class="row">
-
-            <div class="col-lg-6">
-                <canvas id="canvas-DistributionByRequests"></canvas>
-
-            </div>
-
-            <div class="col-lg-6">
-                <canvas id="canvas-DistributionByLanguage"></canvas>
-
-            </div>
-
-        </div>
-    </section>
 
 
 

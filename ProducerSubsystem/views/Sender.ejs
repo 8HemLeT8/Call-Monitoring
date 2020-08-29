@@ -5,6 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sender</title>
+    
+    <!-- font awsome -->
+    <script src="https://kit.fontawesome.com/0c77acaf4d.js" crossorigin="anonymous"></script>
+
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Ubuntu&display=swap"
+        rel="stylesheet">
 
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -21,38 +28,46 @@
     <script src="scripts/TableContent.js"></script>
 </head>
 
-<body onload="initSocket()" >
-    <h1> Sender Page</h1>
-    
+<body onload="initSocket()">
+    <h1> Call Center</h1>
+
     <hr>
 
     <label for="">Total waiting calls: </label>
     <input type="number" id="total" onkeydown="return false;" min="0" max="200" value="0">
-    <input type="button" onclick="sendMessage(total.value)" value="Set"  />
+    <!-- <input class="btn btn-outline-dark" type="button" onclick="sendMessage(total.value)" value="Set" /> -->
+   
     &nbsp;
-    <select id="call status"><option value='Emergency'>emergency</option><option>emergency routine</option><option>calm</option></select>
+    <br>
+    <select id="call status">
+        <option value='Emergency'>emergency</option>
+        <option>emergency routine</option>
+        <option>calm</option>
+    </select>
 
     <hr>
-
-    <input type="button" onclick="startConv()" value="Answer Call" />
-    <table class="table" id="openConversations" border="1" >
-        <thead class="thead-dark">
-            <tr>
-                <th>Start Time</th>
-                <th>City</th>
-                <th>Topic</th>
-                <th>Language</th>
-                <th>Gender</th>
-                <th>Age</th>
-                <th>End</th>
-            </tr>
-        </thead>
-    </table>
-
+    
+    <!-- <input class="btn btn-outline-success" type="button" onclick="startConv()" value="Answer Call" />  -->
+    <button class="btn btn-outline-success" type="button" onclick="startConv()" value="Answer Call"><i class="fas fa-phone-volume"></i> Answer Call</button>
+    <div class="table-container">
+        <table class="table" id="openConversations" border="1">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Start Time</th>
+                    <th>City</th>
+                    <th>Topic</th>
+                    <th>Language</th>
+                    <th>Gender</th>
+                    <th>Age</th>
+                    <th>End</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
 
 
     <!-- Footer -->
-    
+
     <footer class="footer">
         © Copyright 2020 CallCenter
     </footer>
