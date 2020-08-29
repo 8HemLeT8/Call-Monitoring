@@ -45,6 +45,7 @@ function reportEndCall(row) {
     message.age = (row.cells[5].getElementsByTagName('input')[0].value || 18);
     message.totalTime = (parseInt(Date.now()) - parseInt(message.id)) / 1000; // seconds
     message.status = status;
+    message.totalCalls=totalCalls;
     socket.emit("callDetails", message);
     deleteRow(row);
 }

@@ -30,29 +30,31 @@
     <script>
         Statistics = {};
 
-        Statistics.waitingCalls = <%=waitingCalls %> ;
-        console.log(Statistics.waitingCalls);
-
         Statistics.aggWaitingCalls = [<%=aggWaitingCalls %> ];
-        console.log(Statistics.aggWaitingCalls);
-
-        Statistics.waitingTime = <%=waitingTime %>;
-        console.log(Statistics.waitingTime);
+        // console.log(Statistics.aggWaitingCalls);
 
         Statistics.aggWaitingTime = [ <%=aggWaitingTime %>];
-        console.log(Statistics.aggWaitingTime);
+        // console.log(Statistics.aggWaitingTime);
 
-        Statistics.distByReq = 1;
-        console.log(Statistics.distByReq);
+        Statistics.distByReqX = [];
+        Statistics.distByReqY = [];
 
-        Statistics.distByLanguage = 2;
-        console.log(Statistics.distByLanguage);
+        <% for (let req in distByReq) {%>
+            Statistics.distByReqX.push("<%=req%>");
+            Statistics.distByReqY.push(<%=distByReq[req] %>);
+            <%}%>
 
-        Statistics.numOfCallsByArea = 3;
-        console.log(Statistics.numOfCallsByArea);
+            console.log(Statistics.distByReqX);
+        console.log(Statistics.distByReqY);
 
-        Statistics.numOfCallsByTopic = 4;
-        console.log(Statistics.numOfCallsByTopic);
+        Statistics.distByLanguageX = [];
+        Statistics.distByLanguageY = [];
+
+        <% for (let lang in distByLanguage) {%>
+            Statistics.distByLanguageX.push("<%=lang%>");
+            Statistics.distByLanguageY.push(<%=distByLanguage[lang] %>);
+            <%}%>
+
 
 
     </script>
@@ -173,7 +175,7 @@
         <div class="row">
 
             <div class="col-lg-6">
-                <canvas id="canvas-NumOfWaitingCalls"></canvas>
+                <canvas id="canvas-WaitingTime"></canvas>
             </div>
 
             <div class="col-lg-6">
@@ -182,7 +184,7 @@
                         <thead>
                             <tr>
                                 <th>Time of the day</th>
-                                <th>Waiting Calls</th>
+                                <th>Waiting Time</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -190,17 +192,23 @@
                             <% let myDate = new Date("July 21, 1983 00:00:00") ;%>
                             <% let minutes = myDate.getMinutes(); %>
                             <% let hours = myDate.getHours(); %>
-                            
-                            <% for(let i = 0 ; i< 288 ; i++){ %>
+                            <% let currTime = new Date(); %>
+                            <% let currHour = currTime.getHours(); %>
+                            <% let currMinutes = currTime.getMinutes();%>
+                            <% let steps = (12*currHour+Math.ceil(currMinutes/5)) %>
+
+                            <% for(let i = 0 ; i< steps ; i++){ %>
                             <tr>
+                                <% let myNewDate = new Date(myDate.getTime()+5*60000); %>
+                                <% let toHour = myNewDate.getHours()%>
+                                <% let toMinute = myNewDate.getMinutes()%>
 
-                                <td><%= hours%>:<%= minutes%> </td>
+                                <td><%= hours%>:<%= minutes%> - <%= toHour%>:<%= toMinute%></td>
 
-                                <td> value from the object</td>
-                                <% let myNewDate = new Date(myDate.getTime()+5*60000); %> 
+                                <td> <%= aggWaitingTime[i] %> </td>
                                 <% minutes= myNewDate.getMinutes()%>
-                                <% hours= myNewDate.getHours()%> 
-                                <% myDate=myNewDate; %> 
+                                <% hours= myNewDate.getHours()%>
+                                <% myDate=myNewDate; %>
 
                             </tr>
 
@@ -242,17 +250,24 @@
                             <% myDate = new Date("July 21, 1983 00:00:00") ;%>
                             <% minutes = myDate.getMinutes(); %>
                             <% hours = myDate.getHours(); %>
-                            
-                            <% for(let i = 0 ; i< 288 ; i++){ %>
+                            <% currTime = new Date(); %>
+                            <% currHour = currTime.getHours(); %>
+                            <% currMinutes = currTime.getMinutes();%>
+
+
+                            <% for(let i = 0 ; i< steps ; i++){ %>
                             <tr>
 
-                                <td><%= hours%>:<%= minutes%> </td>
+                                <%  myNewDate = new Date(myDate.getTime()+5*60000); %>
+                                <%  toHour = myNewDate.getHours()%>
+                                <%  toMinute = myNewDate.getMinutes()%>
 
-                                <td> value from the object</td>
-                                <% myNewDate = new Date(myDate.getTime()+5*60000); %> 
+                                <td><%= hours%>:<%= minutes%> - <%= toHour%>:<%= toMinute%></td>
+
+                                <td> <%= aggWaitingCalls[i] %> </td>
                                 <% minutes= myNewDate.getMinutes()%>
-                                <% hours= myNewDate.getHours()%> 
-                                <% myDate=myNewDate; %> 
+                                <% hours= myNewDate.getHours()%>
+                                <% myDate=myNewDate; %>
 
                             </tr>
 
@@ -265,7 +280,7 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <canvas id="canvas-WaitingTime"></canvas>
+                <canvas id="canvas-NumOfWaitingCalls"></canvas>
 
             </div>
 
@@ -276,7 +291,7 @@
 
 
 
-    
+
 
     <section class="pieGraphs">
         <div class="row">
@@ -311,10 +326,14 @@
                         </thead>
                         <tbody>
 
+
+                            <% for(let location in callsPerArea){ %>
                             <tr>
-                                <td>stam</td>
-                                <td>data</td>
+                                <td><%=location%></td>
+                                <td><%=callsPerArea[location]%></td>
                             </tr>
+                            <% } %>
+
 
                         </tbody>
                     </table>
@@ -323,21 +342,25 @@
             </div>
 
 
-            <div class="language-table col-lg-6">
+            <div class="topic-table col-lg-6">
                 <div class="table-wrapper-scroll-y my-custom-scrollbar">
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Language</th>
+                                <th>Topic</th>
                                 <th>Number of Calls</th>
                             </tr>
                         </thead>
                         <tbody>
 
+                            <% for(let topic in callsPerTopic) {%>
                             <tr>
-                                <td>stam</td>
-                                <td>data</td>
+
+                                <td><%=topic%></td>
+                                <td><%=callsPerTopic[topic]%></td>
                             </tr>
+
+                            <%}%>
 
                         </tbody>
                     </table>

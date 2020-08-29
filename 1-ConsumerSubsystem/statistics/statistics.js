@@ -30,9 +30,7 @@ function under10minutes(callTime) {
 
 //  ---------------------------------------------------- STATISTIC CALCULATIONS -------------------------------------------
 
-async function last10MinCallsAvg() {}
-
-async function last10MinWaitingTimeAvg() {
+async function last10MinAvg(callAttribute) {
   const keysArr = await collectAllKeys();
   let arr = [];
 
@@ -41,15 +39,19 @@ async function last10MinWaitingTimeAvg() {
     call = JSON.parse(call);
     // console.log("time difference in seconds: " + Math.floor((parseInt(Date.now()) - parseInt(call.id)) / 1000));
     if (under10minutes(call.id)) {
-      arr.push(call.totalTime);
+      arr.push(call[callAttribute]);
     }
   }
   let sum = 0;
   for (let i = 0; i < arr.length; i++) {
     sum += arr[i];
   }
+  if(arr.length==0) {
+    return 'There where no calls in the last 10 minutes';
+  }
+
   sum /= arr.length;
-  console.log(sum);
+  // console.log(sum);
   return sum;
 }
 
@@ -59,30 +61,22 @@ async function aggOf5min(callAttribute) {
   let from = Math.floor(d.getTime() / 1000);
   let to = from + 300;
   let now = Math.floor(new Date().getTime() / 1000);
+
   let avgs = [];
-//   console.log(to);
-//   console.log(now);
-//   console.log(stop);
-
   let temp = [];
-
   let data = await collectAllData();
-//   console.log(data);
 
-
-  while (to < now) {
-    
+  while (to < now+300) {
     for (let i = 0; i < data.length; i++) {
-      let curr = Math.floor(parseInt(data[i][callAttribute]) / 1000);
+      let curr = Math.floor(parseInt(data[i].id) / 1000);
       if (to - curr <= 300 && to - curr >= 0) {
         // add only calls from the last 5 minutes
         //   console.log(curr);
 
-        temp.push(parseInt(data[i].totalTime));
-        //  console.log(temp);
+        temp.push(parseInt(data[i][callAttribute]));
       }
     }
-    
+
     let sum = 0;
     if (temp.length > 0) {
       for (let i = 0; i < temp.length; i++) {
@@ -91,12 +85,11 @@ async function aggOf5min(callAttribute) {
       }
       sum /= temp.length;
     }
-    console.log(sum);
     avgs.push(sum);
     to += 300;
     temp = [];
   }
-//   console.log(avgs);
+    console.log(avgs.length);
   return avgs;
 }
 
@@ -113,28 +106,37 @@ async function getCallsPerAtt(callAttribute) {
       callsPerAtt[currentAttValue] = 1;
     }
   }
-  console.log(callsPerAtt);
+  // console.log(callsPerAtt);
   return callsPerAtt;
 }
 
-// async function calcStatistics() {
-//   return {
-//     waitingTime: await last10MinWaitingTimeAvg(),
-//     waitingCalls: await last10MinCallsAvg(),
-//     aggWaitingTime: await aggWaitingTime(),
-//     aggWaitingCalls: await aggNumOfWaitingCalls(),
-//     distByReq: await callsDistByReq(),
-//     distByLanguage: await callsDistByLanguage(),
-//     callsPerArea: await callsPerArea(),
-//     callsPerTopic: await callsPerTopic(),
-//   };
-// }
+module.exports.calcStatistics= async function () {
+  return {
+    waitingTime: await last10MinAvg("totalTime"),
+    waitingCalls: await last10MinAvg("totalCalls"),
+    aggWaitingTime: await aggOf5min("totalTime"),
+    aggWaitingCalls: await aggOf5min("totalCalls"),
+    distByReq: await getCallsPerAtt("status"),
+    distByLanguage: await getCallsPerAtt("language"),
+    callsPerArea: await getCallsPerAtt("city"),
+    callsPerTopic: await getCallsPerAtt("topic"),
+  };
 
-function test() {}
-// last10MinWaitingTimeAvg();                        DONE
-// getCallsPerAtt("language");
+}
+
+// last10MinAvg('totalTime');
+// last10MinAvg('totalCalls') ;
+//  getCallsPerAtt("language");
 // getCallsPerAtt("status");
 // getCallsPerAtt("topic");
-// getCallsPerAtt("city");
-//aggOf5min('id');
-//aggOf5min('totalCalls');
+//getCallsPerAtt("city");
+//aggOf5min('totalTime');
+//  aggOf5min('totalCalls');
+// calcStatistics();
+// collectAllData().then((res)=>{
+//   console.log(res);
+// });
+// calcStatistics().then((res)=>{
+//   console.log(res);
+// });
+

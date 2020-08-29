@@ -2,11 +2,11 @@
 const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
-const io = require("socket.io")(server);
 const bodyParser = require("body-parser");
 const redis = require("redis");
 const kafka = require("./kafkaConsumer");
 const schedule = require("node-schedule");
+const statistics = require("./statistics/statistics.js");
 
 // set rendering to be with ejs
 app.set("view engine", "ejs");
@@ -45,16 +45,21 @@ const PORT = 4000 || process.env.PORT;
 // ROUTING
 
 app.get("/", function (req, res) {
-  res.render("dashboard", {
-    waitingCalls: 50,
-    aggWaitingCalls: [10, 20, 30],
-    waitingTime: 30,
-    aggWaitingTime: [40, 50, 60],
-    distByReq: [70,80,90],
-    distByLanguage: [ 90 , 80, 70],
-    numOfCallsByArea: [],
-    numOfallsByTopic: [],
+  statistics.calcStatistics().then((stats)=>{
+    console.log(stats);
+    res.render("dashboard",stats)
+    // res.render("dashboard", {
+    //   waitingCalls: 50,
+    //   aggWaitingCalls: [10, 20, 30],
+    //   waitingTime: 30,
+    //   aggWaitingTime: [40, 50, 60],
+    //   distByReq: [70, 80, 90],
+    //   distByLanguage: [90, 80, 70],
+    //   numOfCallsByArea: [],
+    //   numOfallsByTopic: [],
+    // });
   });
+  
 });
 
 // server is listening on port 3000

@@ -3,18 +3,11 @@ let myChart = document.getElementById("canvas-DistributionByRequests").getContex
 let massPopChart = new Chart(myChart, {
   type: "pie", // bar, horizontalBar, pie, line, doughnut, radar, polarArea
   data: {
-    labels: [
-      "Boston",
-      "Worcester",
-      "Springfield",
-      "Lowell",
-      "Cambridge",
-      "New Bedford",
-    ],
+    labels: Statistics.distByReqX,
     datasets: [
       {
         label: "Population",
-        data: [617594, 181045, 153060, 106519, 105162, 95072],
+        data: Statistics.distByReqY,
         //backgroundColor:'green',
         backgroundColor: [
           "rgba(255, 99, 132, 0.6)",
@@ -35,7 +28,7 @@ let massPopChart = new Chart(myChart, {
   options: {
     title: {
       display: true,
-      text: "Largest Cities In Massachusetts",
+      text: "Distribution By Requests",
       fontSize: 25,
     },
     legend: {

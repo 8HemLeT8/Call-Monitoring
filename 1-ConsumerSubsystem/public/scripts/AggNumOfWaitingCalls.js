@@ -1,12 +1,12 @@
 var barChartData = {
-  labels: ["January", "February", "March", "April", "May", "June", "July"],
+  labels: getTimesArr(),
   datasets: [
     {
       label: "Number Of Waiting Calls",
       backgroundColor: color(window.chartColors.purple).alpha(0.5).rgbString(),
       borderColor: window.chartColors.purple,
       borderWidth: 1,
-      data: [50, 50, 50, 50, 50, 50, 50],
+      data: Statistics.aggWaitingCalls,
     },
   ],
 };

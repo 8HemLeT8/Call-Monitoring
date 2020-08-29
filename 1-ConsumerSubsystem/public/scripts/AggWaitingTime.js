@@ -1,6 +1,6 @@
 let color = Chart.helpers.color;
 var barChartData = {
-  labels: ["January", "February", "March"],
+  labels: getTimesArr(),
   datasets: [
     {
       label: "Waiting Time",

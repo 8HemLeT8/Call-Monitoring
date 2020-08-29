@@ -5,18 +5,11 @@ let languageChart = document.getElementById("canvas-DistributionByLanguage").get
 let PopChart = new Chart(languageChart, {
   type: "doughnut", // bar, horizontalBar, pie, line, doughnut, radar, polarArea
   data: {
-    labels: [
-      "Boston",
-      "Worcester",
-      "Springfield",
-      "Lowell",
-      "Cambridge",
-      "New Bedford",
-    ],
+    labels: Statistics.distByLanguageX,
     datasets: [
       {
         label: "Population",
-        data: [617594, 181045, 153060, 106519, 105162, 95072],
+        data: Statistics.distByLanguageY,
         //backgroundColor:'green',
         backgroundColor: [
           "rgba(255, 99, 132, 0.6)",
@@ -37,7 +30,7 @@ let PopChart = new Chart(languageChart, {
   options: {
     title: {
       display: true,
-      text: "Largest Cities In Massachusetts",
+      text: "Distribution By Language",
       fontSize: 25,
     },
     legend: {
