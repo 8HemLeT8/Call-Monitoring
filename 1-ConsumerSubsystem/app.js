@@ -7,6 +7,8 @@ const redis = require("redis");
 const kafka = require("./kafkaConsumer");
 const schedule = require("node-schedule");
 const statistics = require("./statistics/statistics.js");
+// MACRO
+const PORT = 4000 || process.env.PORT;
 
 // set rendering to be with ejs
 app.set("view engine", "ejs");
@@ -37,8 +39,6 @@ schedule.scheduleJob(rule, function () {
   console.log("Redis DB Flushed!");
 });
 
-// MACRO
-const PORT = 4000 || process.env.PORT;
 
 
 // ROUTING

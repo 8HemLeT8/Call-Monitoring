@@ -31,12 +31,11 @@ function under10minutes(callTime) {
 //  ---------------------------------------------------- STATISTIC CALCULATIONS -------------------------------------------
 
 async function last10MinAvg(callAttribute) {
-  const keysArr = await collectAllKeys();
+  const data = await collectAllData();
   let arr = [];
 
-  for (let i = 0; i < keysArr.length; i++) {
-    let call = await client.get(keysArr[i]);
-    call = JSON.parse(call);
+  for (let i = 0; i < data.length; i++) {
+    let call = data[i];
     // console.log("time difference in seconds: " + Math.floor((parseInt(Date.now()) - parseInt(call.id)) / 1000));
     if (under10minutes(call.id)) {
       arr.push(call[callAttribute]);
