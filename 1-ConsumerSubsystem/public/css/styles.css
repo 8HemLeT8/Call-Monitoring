@@ -12,8 +12,16 @@ h1 {
   font-weight: bold;
 }
 h2,h3{
-  color: rgb(54, 162, 235);
+  color: #393b44;
   text-align:center;
+}
+hr{
+  border: dotted 5px #393b44;
+  border-bottom: none;
+  width: 15%;
+  margin-bottom:7% ;
+  margin-top: 7%;
+  
 }
 table{
   text-align: center;

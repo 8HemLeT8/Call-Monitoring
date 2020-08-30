@@ -20,7 +20,7 @@ function startConv() {
     cLanguage.innerHTML = "<select><option value='hebrew'>hebrew</option><option value='english'>english</option><option value='amharic'>amharic</option><option value='russian'>russian</option><option value='arabic'>arabic</option><option value='thai'>thai</option></select>";
     cAge.innerHTML = "<input type='number' min='0' max='120'/>";
     cGender.innerHTML = "<select><option value='male'>male</option><option value='female'>female</option></select>";
-    cEnd.innerHTML = "<button class='btn btn-outline-danger' onclick='reportEndCall(this.parentNode.parentNode)'><i class='fas fa-phone-slash'></i> סיום</button>";
+    cEnd.innerHTML = "<button class='btn btn-outline-danger' onclick='reportEndCall(this.parentNode.parentNode)'><i class='fas fa-phone-slash'></i> End Call</button>";
 
     var totalCalls = parseInt(document.getElementById("total").value) || 0;
     document.getElementById("total").value = (++totalCalls) + "";
